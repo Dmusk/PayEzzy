@@ -1,0 +1,10 @@
+// the /api/v1/user/signin
+// the /api/v1/user/signup
+// the /api/v1/user/changePassword
+
+
+
+// the /api/v2/account/sendMoney
+// the /api/v2/account/balance
+
+//host to port 3000;

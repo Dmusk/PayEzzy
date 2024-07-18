@@ -1,9 +1,15 @@
 //main server
 const express = require("express");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+
 const userRouter = require("./routes/user");
 const accountRouter = require("./routes/account");
 
 const app = express();
+
+app.use(cors());
+app.use(express.json()); //to parse the body object (body-parser);
 
 //-> users
 
