@@ -1,12 +1,12 @@
 // backend/routes/user.js
-const express = require("express");
+import express from "express";
 
 const router = express.Router();
-const zod = require("zod");
-const { User, Account } = require("../db");
-const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = require("../config");
-const { authMiddleware } = require("../middleware");
+import zod from "zod";
+import { User, Account } from "../db.js";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "../config.js";
+import { authMiddleware } from "../middleware.js";
 
 const signupBody = zod.object({
   username: zod.string().email(),
@@ -19,7 +19,7 @@ router.post("/signup", async (req, res) => {
   const { success } = signupBody.safeParse(req.body);
   if (!success) {
     return res.status(411).json({
-      message: "Email already taken / Incorrect inputs",
+      message: "Incorrect inputs",
     });
   }
 
@@ -43,7 +43,7 @@ router.post("/signup", async (req, res) => {
 
   await Account.create({
     userId,
-    balance: 1 + Math.random() * 10000,
+    balance: 1 + Math.random() * 1000000,
   });
 
   const token = jwt.sign(
@@ -52,6 +52,8 @@ router.post("/signup", async (req, res) => {
     },
     JWT_SECRET
   );
+
+  console.log("signupped successful");
 
   res.json({
     message: "User created successfully",
@@ -147,4 +149,4 @@ router.get("/bulk", async (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

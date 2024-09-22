@@ -1,7 +1,9 @@
 // backend/db.js
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-mongoose.connect("mongodb://localhost:27017/paytm");
+mongoose.connect(
+  "mongodb+srv://Dadu:DaduMDB%402003@cluster0.mzwtfbm.mongodb.net/PayEzzy"
+);
 
 // Create a Schema for Users
 const userSchema = new mongoose.Schema({
@@ -48,7 +50,4 @@ const accountSchema = new mongoose.Schema({
 const Account = mongoose.model("Account", accountSchema);
 const User = mongoose.model("User", userSchema);
 
-module.exports = {
-  User,
-  Account,
-};
+export { Account, User };
